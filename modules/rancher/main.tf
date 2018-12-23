@@ -4,6 +4,13 @@ provider "aws" {
   profile                 = "default"
 }
 
+data "aws_subnet_ids" "selected" {
+  vpc_id      = "${var.vpc_id}"
+  tags = {
+    Tier = "Private"
+  }
+}
+
 resource "aws_security_group" "allow_all" {
   name        = "allow_all"
   description = "Allow all inbound traffic"
@@ -26,12 +33,12 @@ resource "aws_security_group" "allow_all" {
 
 resource "aws_instance" "ec2-rancher" {
   count                  = "${var.instance_count}"
-  ami                    = "ami-ebd02392"
+  ami                    = "ami-0ac019f4fcb7cb7e6"
   instance_type          = "t2.medium"
-  key_name               = "user1"
+  key_name               = "shant1"
   monitoring             = true
   vpc_security_group_ids = ["${aws_security_group.allow_all.id}"]
-  subnet_id              = "subnet-2345"
+  subnet_id              = "${element(data.aws_subnet_ids.selected.ids, count.index)}"
   tags = {
     Terraform = "true"
   }
@@ -40,7 +47,7 @@ resource "aws_instance" "ec2-rancher" {
 resource "aws_lb_target_group" "tg-https" {
   name     = "tg-https"
   port     = "443"
-  protocol = "tcp"
+  protocol = "TCP"
   vpc_id   = "${var.vpc_id}"
   target_type = "instance"
   health_check {
@@ -56,7 +63,7 @@ resource "aws_lb_target_group" "tg-https" {
 resource "aws_lb_target_group" "tg-http" {
   name     = "tg-https"
   port     = "80"
-  protocol = "tcp"
+  protocol = "TCP"
   vpc_id   = "${var.vpc_id}"
   target_type = "instance"
   health_check {
