@@ -53,7 +53,6 @@ resource "aws_lb_target_group" "tg-https" {
   health_check {
      healthy_threshold = 2
      unhealthy_threshold = 2
-     timeout = 60
      protocol  = "HTTP"
      interval = 30
      path = "/healthz"
@@ -61,7 +60,7 @@ resource "aws_lb_target_group" "tg-https" {
 }
 
 resource "aws_lb_target_group" "tg-http" {
-  name     = "tg-https"
+  name     = "tg-http"
   port     = "80"
   protocol = "TCP"
   vpc_id   = "${var.vpc_id}"
@@ -69,7 +68,6 @@ resource "aws_lb_target_group" "tg-http" {
   health_check {
      healthy_threshold = 2
      unhealthy_threshold = 2
-     timeout = 60
      protocol  = "HTTP"
      interval = 30
      path = "/healthz"
