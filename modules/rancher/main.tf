@@ -55,7 +55,7 @@ resource "aws_lb_target_group" "tg-https" {
      unhealthy_threshold = 2
      timeout = 60
      protocol  = "HTTP"
-     interval = 90
+     interval = 30
      path = "/healthz"
   }
 }
@@ -71,7 +71,7 @@ resource "aws_lb_target_group" "tg-http" {
      unhealthy_threshold = 2
      timeout = 60
      protocol  = "HTTP"
-     interval = 90
+     interval = 30
      path = "/healthz"
   }
 }
