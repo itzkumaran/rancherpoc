@@ -1,6 +1,5 @@
 variable "subnet_ids" {
   type = "map"
-
   default = {
     us-east-1a = "subnet-1234"
     us-east-1b = "subnet-4567"
@@ -8,17 +7,15 @@ variable "subnet_ids" {
   }
 }
 
-variable "zones" {
+variable "availability_zones" {
   type = "list"
-  default = ["us-east-1a", "us-east-1b", "us-east-1b"]
-}
-
-variable "instance_count" {
-  type = "string"
-  default = "1"
 }
 
 variable "vpc_id" {
   type = "string"
-  default = "vpc_ssss"
+  default = "vpc-e6173c9f"
+}
+
+variable "instance_count" {
+  type = "string"
 }

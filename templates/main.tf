@@ -7,4 +7,6 @@ provider "aws" {
 module "rancher" {
   source                 = "../modules/rancher"
   instance_count         = "1"
+  availability_zones     = ["us-east-1a","us-east-1b","us-east-1c"]
+  vpc_id                 = "vpc-024fd0ce950b5162f"
 }
