@@ -1,3 +1,0 @@
-module "rancher" {
-   source = "./rancher"
-}

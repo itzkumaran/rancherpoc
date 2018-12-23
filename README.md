@@ -1,2 +1,0 @@
-# rancherpoc
-rancher-poc
