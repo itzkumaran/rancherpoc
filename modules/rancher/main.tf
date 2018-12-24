@@ -33,8 +33,8 @@ resource "aws_security_group" "allow_all" {
 
 resource "aws_instance" "ec2-rancher" {
   count                  = "${var.instance_count}"
-  ami                    = "ami-0ac019f4fcb7cb7e6"
-  instance_type          = "t2.medium"
+  ami                    = "${var.ami_id}"
+  instance_type          = "${var.instance_type}"
   key_name               = "shant1"
   monitoring             = true
   vpc_security_group_ids = ["${aws_security_group.allow_all.id}"]
