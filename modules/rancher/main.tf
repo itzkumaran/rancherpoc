@@ -35,7 +35,7 @@ resource "aws_instance" "ec2-rancher" {
   count                  = "${var.instance_count}"
   ami                    = "${var.ami_id}"
   instance_type          = "${var.instance_type}"
-  key_name               = "shant1"
+  key_name               = "test"
   monitoring             = true
   vpc_security_group_ids = ["${aws_security_group.allow_all.id}"]
   subnet_id              = "${element(data.aws_subnet_ids.selected.ids, count.index)}"
